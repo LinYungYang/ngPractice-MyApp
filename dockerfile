@@ -9,7 +9,7 @@ RUN npm install
 # copy其餘目錄及檔案
 COPY ./ ./
 COPY src src
-# 指定建立build output資料夾，--prod為Production Mode
+# 指定建立build output資料夾，--prod為Production Mode, my-app 為專案名稱依照各自的專案變更
 RUN npm run build --output-path=/usr/app/dist/my-app --prod
 
 # pull nginx image
