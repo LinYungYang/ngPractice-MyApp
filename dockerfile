@@ -14,7 +14,15 @@ RUN npm run build --output-path=/usr/app/dist/my-app --prod
 
 # pull nginx image
 FROM nginx:alpine
+
+RUN chgrp -R 0 /var/cache/nginx /var/run /var/log/nginx && \
+    chmod -R g+rwX /etc/nginx/ /var/cache/nginx /var/run /var/log/nginx
+RUN sed -i.bak 's/listen\(.*\)80;/listen 8081;/' /etc/nginx/conf.d/default.conf
+RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
+
 # 從第一階段的檔案copy
 COPY --from=builder /usr/app/dist/my-app /usr/share/nginx/html
 # 覆蓋image裡的設定檔
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 8080
