@@ -1,0 +1,10 @@
+{
+    "sonarlint.analyzerProperties": {
+        
+    
+    },
+    "sonarlint.connectedMode.project": {
+        "connectionId": "ngapp2",
+        "projectKey": "ngapp2"
+    }
+}
